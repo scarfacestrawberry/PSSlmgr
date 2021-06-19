@@ -36,7 +36,7 @@ Function Get-LicenseStatus {
 
         [String]$ServiceQueryString = "select $LicenseServiceFields from SoftwareLicensingService"
 
-        $LicenseServiceData = Get-CimInstance -Query $ServiceQueryString
+        $LicenseServiceData = Get-CimInstance -Query $ServiceQueryString -ComputerName $ComputerName
 
     }
     else {
@@ -47,7 +47,7 @@ Function Get-LicenseStatus {
 
     [String]$ProductQueryString = "select $LicenseProductFields from SoftwareLicensingProduct where ApplicationId = `"$ApplicationIDInternal`" and PartialProductKey IS NOT NULL"
 
-    $LicenseProductData = $(Get-CimSoftwareLicensingProduct -Query $ProductQueryString)
+    $LicenseProductData = $(Get-CimSoftwareLicensingProduct -Query $ProductQueryString -ComputerName $ComputerName)
 
     Try {
 
